@@ -21,6 +21,17 @@ public class Piece : MonoBehaviour
                     }
                 }
             }
+            //eat backwards - top left
+            if(x>=2 && y<=5){
+                Piece p = board[x-1,y+1];
+                //if opponent piece is present
+                if(p!=null && p.isWhite!=isWhite){
+                    //check if it can eat it and land on it
+                    if(board[x-2,y-2]==null){
+                        return true;
+                    }
+                }
+            }
 
             //top right
             if(x<=5 && y<=5){
@@ -33,6 +44,18 @@ public class Piece : MonoBehaviour
                     }
                 }
             }
+            //eat backwards - top right
+            if(x<=5 && y<=5){
+                Piece p = board[x+1,y+1];
+                //if opponent piece is present
+                if(p!=null && p.isWhite!=isWhite){
+                    //check if it can eat it and land on it
+                    if(board[x+2,y-2]==null){
+                        return true;
+                    }
+                }
+            }
+
             //top left king
             if(isKing){
                 if(x>=2 && y<=5){
@@ -43,11 +66,30 @@ public class Piece : MonoBehaviour
                         }
                     }
                 }
+                //eat backwards 
+                if(x>=2 && y<=5){
+                    Piece p = board[x-1,y+1];
+                    if(p!=null && p.isWhite!=isWhite){
+                        if(board[x-2,y+2]==null){
+                            return true;
+                        }
+                    }
+                }
+
                 //top right king
                 if(x>=2 && y<=5){
                     Piece p = board[x+2,y-2];
                     if(p!=null && p.isWhite!=isWhite){
                         if(board[x+2,y-2]==null){
+                            return true;
+                        }
+                    }
+                }
+                //eat bw - top right king
+                if(x<=5 && y<=5){
+                    Piece p = board[x+2,y-2];
+                    if(p!=null && p.isWhite!=isWhite){
+                        if(board[x+2,y+2]==null){
                             return true;
                         }
                     }
@@ -67,6 +109,17 @@ public class Piece : MonoBehaviour
                     }
                 }
             }
+            //eat bw - bottom left
+            if(x>=2 && y>=2){
+                Piece p = board[x-1,y-1];
+                //if opponent piece is present
+                if(p!=null && p.isWhite!=isWhite){
+                    //check if it can eat it and land on it
+                    if(board[x-2,y+2]==null){
+                        return true;
+                    }
+                }
+            }
 
             //bottom right
             if(x<=5 && y>=2){
@@ -79,6 +132,18 @@ public class Piece : MonoBehaviour
                     }
                 }
             }
+            //eat bw - bottom right
+            if(x<=5 && y>=2){
+                Piece p = board[x+1,y-1];
+                //if opponent piece is present
+                if(p!=null && p.isWhite!=isWhite){
+                    //check if it can eat it and land on it
+                    if(board[x+2,y+2]==null){
+                        return true;
+                    }
+                }
+            }
+
             //bottom left king
             if(isKing){
                 if(x>=2 && y>=2){
@@ -89,11 +154,29 @@ public class Piece : MonoBehaviour
                         }
                     }
                 }
+                //eat bw - bottom left king
+                if(x>=2 && y>=2){
+                    Piece p = board[x+2,y-2];
+                    if(p!=null && p.isWhite!=isWhite){
+                        if(board[x+2,y-2]==null){
+                            return true;
+                        }
+                    }
+                }
                 //bottom right king
                 if(x<=5 && y>=2){
                     Piece p = board[x+1,y-1];
                     if(p!=null && p.isWhite!=isWhite){
                         if(board[x+2,y+2]==null){
+                            return true;
+                        }
+                    }
+                }
+                //eat bw - bottom right king
+                if(x>=2 && y>=2){
+                    Piece p = board[x+1,y-1];
+                    if(p!=null && p.isWhite!=isWhite){
+                        if(board[x+2,y-2]==null){
                             return true;
                         }
                     }
@@ -126,7 +209,14 @@ public class Piece : MonoBehaviour
                         return true;
                     }
                 }
+                else if(deltaMoveY == -2){
+                    Piece p = board[(x1+x2)/2, (y1+y2)/2];
+                    if(p != null && p.isWhite != isWhite){
+                        return true;
+                    }
+                }
             }
+           
             if(isKing){
                 if(deltaMove == 1){
                     if(deltaMoveY == -1){
@@ -157,7 +247,14 @@ public class Piece : MonoBehaviour
                         return true;
                     }
                 }
+                else if(deltaMoveY == 2){
+                    Piece p = board[(x1+x2)/2, (y1+y2)/2];
+                    if(p != null && p.isWhite != isWhite){
+                        return true;
+                    }
+                }
             }
+            
             if(isKing){
                 if(deltaMove == 1){
                     if(deltaMoveY == 1){
